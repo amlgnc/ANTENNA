@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/UI/fonts/main_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/worlds/scripts/Menu.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/themes/MainMenu_theme.tres" type="Theme" id=3]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+margin_right = 320.0
+margin_bottom = 180.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+margin_left = 107.0
+margin_top = 52.0
+margin_right = 212.0
+margin_bottom = 127.0
+custom_constants/separation = 20
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_right = 105.0
+margin_bottom = 18.0
+
+[node name="Title" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/CenterContainer"]
+margin_right = 105.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 1 )
+text = "ANTENNA"
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_top = 38.0
+margin_right = 105.0
+margin_bottom = 75.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/CenterContainer2"]
+margin_left = 30.0
+margin_right = 74.0
+margin_bottom = 37.0
+custom_constants/separation = 5
+
+[node name="Start" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer2"]
+margin_right = 44.0
+margin_bottom = 9.0
+focus_neighbour_top = NodePath("../Quit")
+text = "start"
+
+[node name="Options" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer2"]
+margin_top = 14.0
+margin_right = 44.0
+margin_bottom = 23.0
+text = "options"
+
+[node name="Quit" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer2"]
+margin_top = 28.0
+margin_right = 44.0
+margin_bottom = 37.0
+focus_neighbour_bottom = NodePath("../Start")
+text = "quit"
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer2/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer2/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer2/Quit" to="." method="_on_Quit_pressed"]
