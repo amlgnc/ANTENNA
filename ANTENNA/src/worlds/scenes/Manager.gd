@@ -11,7 +11,7 @@ var is_options = false
 
 func _process(_delta):
 	# main menu gestion
-	if is_menu.get_node("Menu") != null:
+	if is_menu.get_node_or_null("Menu") != null:
 		if menu.start == true:
 			menu.start = false
 			is_start = true
