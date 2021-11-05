@@ -1,4 +1,4 @@
-extends Node2D
+extends Spatial
 
 var screen_size = OS.get_screen_size()
 var window_size = OS.get_window_size()
