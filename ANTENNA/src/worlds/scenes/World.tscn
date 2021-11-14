@@ -5,13 +5,13 @@
 [ext_resource path="res://src/worlds/scenes/MenuTransition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/worlds/scripts/Manager.gd" type="Script" id=4]
 
-[node name="World" type="Spatial"]
+[node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Manager" type="Spatial" parent="."]
+[node name="Manager" type="Node2D" parent="."]
 script = ExtResource( 4 )
 
-[node name="CurrentScene" type="Spatial" parent="Manager"]
+[node name="CurrentScene" type="Node2D" parent="Manager"]
 
 [node name="Menu" parent="Manager/CurrentScene" instance=ExtResource( 1 )]
 

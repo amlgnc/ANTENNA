@@ -1,4 +1,4 @@
-extends Spatial
+extends Node2D
 
 onready var path = null
 onready var menu = $CurrentScene/Menu
@@ -8,7 +8,7 @@ func _process(_delta):
 	if $CurrentScene.get_node_or_null("Menu") != null:
 		if menu.start == true:
 			menu.start = false
-			path = preload("res://src/worlds/scenes/StartMenu.tscn")
+			path = preload("res://src/worlds/scenes/Cinematic.tscn")
 			$MenuTransition.transition()
 
 func _on_MenuTransition_transitioned():

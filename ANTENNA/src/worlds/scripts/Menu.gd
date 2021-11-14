@@ -1,9 +1,9 @@
-extends Spatial
+extends Node2D
 
 var start = false
 
 func _ready():
-	$MarginContainer/CenterContainer/VBoxContainer/CenterContainer2/VBoxContainer2/Start.grab_focus()
+	$Menu/VBoxContainer/Start.grab_focus()
 
 func _on_Start_pressed():
 	start = true
