@@ -8,7 +8,7 @@ func _process(_delta):
 	if $CurrentScene.get_node_or_null("Menu") != null:
 		if menu.start == true:
 			menu.start = false
-			path = preload("res://src/worlds/scenes/Cinematic.tscn")
+			path = preload("res://src/worlds/scenes/Level.tscn")
 			$MenuTransition.transition()
 
 func _on_MenuTransition_transitioned():
