@@ -1,12 +1,25 @@
 extends Node2D
 
+var pressed = false
 var start = false
 
 func _ready():
 	$Menu/VBoxContainer/Start.grab_focus()
 
 func _on_Start_pressed():
-	start = true
+	if pressed == false:
+		pressed = true
+		$SelectSFX.play()
+		start = true
 
 func _on_Quit_pressed():
-	get_tree().quit()
+	if pressed == false:
+		get_tree().quit()
+
+
+func _on_Start_focus_entered():
+	$MovementSFX.play()
+
+
+func _on_Quit_focus_entered():
+	$MovementSFX.play()

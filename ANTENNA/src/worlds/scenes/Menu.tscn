@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
+[ext_resource path="res://src/sounds/music/wind.mp3" type="AudioStream" id=1]
 [ext_resource path="res://src/worlds/scripts/Menu.gd" type="Script" id=2]
 [ext_resource path="res://src/UI/themes/MainMenu_theme.tres" type="Theme" id=3]
 [ext_resource path="res://src/UI/background/space.png" type="Texture" id=4]
 [ext_resource path="res://src/UI/background/title.png" type="Texture" id=5]
+[ext_resource path="res://src/sounds/sfx/select.wav" type="AudioStream" id=6]
+[ext_resource path="res://src/sounds/sfx/movement.wav" type="AudioStream" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "/* 
@@ -111,6 +114,14 @@ shader_param/shake_speed = 5.0
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://src/UI/fonts/main.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 24
+outline_size = 1
+font_data = SubResource( 5 )
+
 [node name="Menu" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -135,6 +146,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="autor" type="MarginContainer" parent="Menu"]
+margin_left = 16.0
+margin_top = 677.0
+margin_right = 1280.0
+margin_bottom = 704.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="autor_name" type="Label" parent="Menu/autor"]
+margin_right = 1264.0
+margin_bottom = 27.0
+custom_fonts/font = SubResource( 6 )
+text = "by   retromodern"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 margin_top = 520.0
 margin_right = 1280.0
@@ -158,5 +184,17 @@ margin_bottom = 84.0
 focus_neighbour_bottom = NodePath("../Start")
 text = "quit"
 
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
+
+[node name="MovementSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="SelectSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[connection signal="focus_entered" from="Menu/VBoxContainer/Start" to="." method="_on_Start_focus_entered"]
 [connection signal="pressed" from="Menu/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="focus_entered" from="Menu/VBoxContainer/Quit" to="." method="_on_Quit_focus_entered"]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

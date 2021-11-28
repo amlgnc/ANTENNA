@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/sounds/sfx/fight.wav" type="AudioStream" id=1]
+[ext_resource path="res://src/UI/fonts/text_dynamicfont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/worlds/scripts/LevelTransition.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_to_normal"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "indication_fight"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Indication:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "- FIGHT -", "" ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "indication_ready"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Indication:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "- get ready -", "", "- get ready -", "", "- get ready -", "", "- get ready -", "", "- get ready -", "", "- get ready -", "" ]
+}
+
+[node name="LevelTransition" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationFade" type="AnimationPlayer" parent="."]
+anims/fade_to_normal = SubResource( 1 )
+
+[node name="TextGame" type="CenterContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Indication" type="Label" parent="TextGame"]
+margin_left = 560.0
+margin_top = 336.0
+margin_right = 719.0
+margin_bottom = 384.0
+custom_fonts/font = ExtResource( 2 )
+text = "- FIGHT -"
+
+[node name="AnimationIndication" type="AnimationPlayer" parent="TextGame"]
+anims/indication_fight = SubResource( 2 )
+anims/indication_ready = SubResource( 3 )
+
+[node name="IndicationSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+
+[connection signal="animation_finished" from="AnimationFade" to="." method="_on_AnimationFade_animation_finished"]
+[connection signal="animation_finished" from="TextGame/AnimationIndication" to="." method="_on_AnimationIndication_animation_finished"]

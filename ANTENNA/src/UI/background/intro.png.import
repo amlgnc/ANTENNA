@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player.png-cfa6a57e775ef93d9e72d6063b13d0d2.stex"
+path="res://.import/intro.png-f716cb0a31acfbce595bd89c2ef9dce4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/worlds/scripts/Player.png"
-dest_files=[ "res://.import/Player.png-cfa6a57e775ef93d9e72d6063b13d0d2.stex" ]
+source_file="res://src/UI/background/intro.png"
+dest_files=[ "res://.import/intro.png-f716cb0a31acfbce595bd89c2ef9dce4.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

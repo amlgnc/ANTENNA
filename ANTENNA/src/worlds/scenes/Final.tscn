@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/fonts/text_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/shaders/Glitch.tres" type="Material" id=2]
+
+[node name="Final" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer"]
+margin_left = 575.0
+margin_top = 336.0
+margin_right = 704.0
+margin_bottom = 384.0
+custom_fonts/font = ExtResource( 1 )
+text = "victory"
+
+[node name="Glitch" type="ColorRect" parent="."]
+material = ExtResource( 2 )
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
