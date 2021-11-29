@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/sounds/music/wind.mp3" type="AudioStream" id=1]
 [ext_resource path="res://src/worlds/scripts/Menu.gd" type="Script" id=2]
 [ext_resource path="res://src/UI/themes/MainMenu_theme.tres" type="Theme" id=3]
-[ext_resource path="res://src/UI/background/space.png" type="Texture" id=4]
+[ext_resource path="res://src/UI/background/Background.png" type="Texture" id=4]
 [ext_resource path="res://src/UI/background/title.png" type="Texture" id=5]
 [ext_resource path="res://src/sounds/sfx/select.wav" type="AudioStream" id=6]
 [ext_resource path="res://src/sounds/sfx/movement.wav" type="AudioStream" id=7]
@@ -114,23 +114,15 @@ shader_param/shake_speed = 5.0
 shader_param/shake_block_size = 30.5
 shader_param/shake_color_rate = 0.01
 
-[sub_resource type="DynamicFontData" id=5]
-font_path = "res://src/UI/fonts/main.ttf"
-
-[sub_resource type="DynamicFont" id=6]
-size = 24
-outline_size = 1
-font_data = SubResource( 5 )
-
 [node name="Menu" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Menu" type="CanvasLayer" parent="."]
 
-[node name="Space" type="Sprite" parent="Menu"]
+[node name="Background" type="Sprite" parent="Menu"]
 material = SubResource( 2 )
-position = Vector2( 640, 360 )
-scale = Vector2( 4, 4 )
+position = Vector2( 640, 352 )
+scale = Vector2( 1.3, 1.51111 )
 texture = ExtResource( 4 )
 
 [node name="title" type="Sprite" parent="Menu"]
@@ -154,12 +146,6 @@ margin_bottom = 704.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="autor_name" type="Label" parent="Menu/autor"]
-margin_right = 1264.0
-margin_bottom = 27.0
-custom_fonts/font = SubResource( 6 )
-text = "by   retromodern"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 margin_top = 520.0

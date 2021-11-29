@@ -34,6 +34,9 @@ func _physics_process(delta):
 			animationPlayer.play("Jump")
 			if Input.is_action_just_released("ui_up") and motion.y < -JUMP_FORCE/2:
 				motion.y = -JUMP_FORCE/2
+			if Input.is_action_pressed("ui_down"):
+				motion.y = +JUMP_FORCE/0.5
+		
 		if Input.is_action_just_pressed("ui_accept") and stats_pp >= 5:
 			stats_pp = stats_pp - 5
 			$LaserSFX.play()
@@ -45,7 +48,3 @@ func shoot():
 	var bullet = bullet_path.instance()
 	get_parent().add_child(bullet)
 	bullet.position = $antenna.global_position
-
-
-func _on_Area2D_area_entered(area):
-	pass

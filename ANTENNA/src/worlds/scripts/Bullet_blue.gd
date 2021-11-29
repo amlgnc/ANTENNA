@@ -12,10 +12,10 @@ func _ready():
 func _physics_process(delta):
 	var collision_info = move_and_slide(velocity.normalized() * speed)
 
-func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
+func _on_Timer_timeout():
+	queue_free()
+
+func _on_Area2D_body_entered(body):
 	get_parent().get_node("Player").stats_pp += 5
 	self.hide()
 	$PlayerBonusSFX.play()
-
-func _on_Timer_timeout():
-	queue_free()

@@ -45,4 +45,5 @@ func shoot_blue():
 
 func _on_Area2D_area_entered(area):
 	$BossHurtSFX.play()
+	print(hp)
 	hp = hp - 1

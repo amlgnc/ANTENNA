@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/intro_boss.wav-f5c32290b56d2527a19fdf0a01f1770e.sample"
+
+[deps]
+
+source_file="res://src/sounds/sfx/intro_boss.wav"
+dest_files=[ "res://.import/intro_boss.wav-f5c32290b56d2527a19fdf0a01f1770e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

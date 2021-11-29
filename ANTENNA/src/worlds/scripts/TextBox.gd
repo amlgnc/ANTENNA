@@ -5,6 +5,7 @@ const CHAR_READ_RATE = 0.05
 onready var textbox_container = $TextboxContainer
 onready var end_symbol = $TextboxContainer/MarginContainer/HBoxContainer/End
 onready var label = $TextboxContainer/MarginContainer/HBoxContainer/Label
+onready var timer = get_node("Timer")
 
 enum State {
 	READY,
@@ -14,9 +15,12 @@ enum State {
 
 var current_state = State.READY
 var text_queue = []
-var text_start = false
+var state = 0
+var timer_end = false
 
 func _ready():
+	timer.set_wait_time(1.5)
+	timer.start()
 	print("Starting state: State.READY")
 	hide_textbox()
 	queue_text("....................")
@@ -42,12 +46,14 @@ func _ready():
 	queue_text(".")
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		text_start = true;
 	match current_state:
 		State.READY:
-			if !(text_queue.empty()) and text_start == true:
+			if !(text_queue.empty()) and timer_end:
+				state += 1
 				$DialogueSFX.play()
+				# boss effects
+				if state == 11 or state == 12 or state == 15 or state > 17:
+					$IntroBoss.play()
 				display_text()
 		State.READING:
 			if Input.is_action_just_pressed("ui_accept"):
@@ -62,7 +68,7 @@ func _process(delta):
 				change_state(State.READY)
 				hide_textbox()
 	if text_queue.empty():
-		get_tree().change_scene("res://src/worlds/scenes/Level.tscn")
+		$IntroTransition/AnimationPlayer.play("fade")
 
 func queue_text(next_text):
 	text_queue.push_back(next_text)
@@ -86,14 +92,13 @@ func display_text():
 
 func change_state(next_state):
 	current_state = next_state
-	match current_state:
-		State.READY:
-			print("Changing state to: State.READY")
-		State.READING:
-			print("Changing state to: State.READING")
-		State.FINISHED:
-			print("Changing state to: State.FINISHED")
 
 func _on_Tween_tween_completed(object, key):
 	end_symbol.text = ">"
 	change_state(State.FINISHED)
+
+func _on_Timer_timeout():
+	timer_end = true
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	get_tree().change_scene("res://src/worlds/scenes/Level.tscn")

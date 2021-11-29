@@ -25,8 +25,7 @@ polygon = PoolVector2Array( 1280, 720, 0, 720, 0, 664, 1280, 664 )
 polygon = PoolVector2Array( 1304, 664, 1304, 384, 1344, 384, 1344, 664 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 224, 608 )
-scale = Vector2( 4, 4 )
+position = Vector2( 232, 608 )
 
 [node name="LevelStats" parent="." instance=ExtResource( 6 )]
 

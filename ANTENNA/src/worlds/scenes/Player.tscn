@@ -39,6 +39,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 4, 4 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -48,12 +49,12 @@ hframes = 3
 frame = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -13.0924, 0.970831, 10.9564, -9.21628, 12.1361, 12.2276, -13.2248, 11.8965 )
+polygon = PoolVector2Array( -9.97739, 1.96602, -11.0999, 11.998, 3.94815, 12.0682, 11.0337, 5.99987, 12.9629, 0.843559, 11.3737, -2.7819, 5.87777, -4.13933, 1.01086, -1.92108, 1.04396, 2.97893, -2.8297, 0.0323029, -7.13377, -0.000805378 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PoolVector2Array( -13.0924, 0.970831, 10.9564, -9.21628, 12.1361, 12.2276, -13.2248, 11.8965 )
+polygon = PoolVector2Array( -9.97739, 1.96602, -11.0999, 11.998, 3.94815, 12.0682, 11.0337, 5.99987, 12.9629, 0.843559, 11.3737, -2.7819, 5.87777, -4.13933, 1.01086, -1.92108, 1.04396, 2.97893, -2.8297, 0.0323029, -7.13377, -0.000805378 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Jump = SubResource( 1 )
