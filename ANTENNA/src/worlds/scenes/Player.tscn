@@ -1,12 +1,74 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/sprites/Player.png" type="Texture" id=1]
 [ext_resource path="res://src/sounds/sfx/laser_shoot.wav" type="AudioStream" id=2]
 [ext_resource path="res://src/worlds/scripts/Player.gd" type="Script" id=3]
 [ext_resource path="res://src/sounds/sfx/jump.wav" type="AudioStream" id=4]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Jump"
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+/*
+Made with a whole lot of nightmare fuel.
+Logic's Under Pressure and Bobby Tarantino II Albums was in rotation during
+the making process.
+Hope you enjoy!
+
+You're auto-friended to me if you're a Logic fan
+RattPack all day!
+*/
+
+//upscaling multiplier amount
+const float SCALE = 10.0;
+
+//image mipmap level, for base upscaling
+const int ML = 0;
+
+//equality threshold of 2 colors before forming lines
+uniform float THRESHOLD = 0.1;
+
+//anti aliasing scaling, smaller value make lines more blurry
+uniform float AA_SCALE = 2.0;
+
+
+//draw diagonal line connecting 2 pixels if within threshold
+vec4 diag(vec4 sum, vec2 uv, vec2 p1, vec2 p2, sampler2D iChannel0, float LINE_THICKNESS) {
+    vec4 v1 = texelFetch(iChannel0,ivec2(uv+vec2(p1.x,p1.y)),ML),
+        v2 = texelFetch(iChannel0,ivec2(uv+vec2(p2.x,p2.y)),ML);
+    if (length(v1-v2) < THRESHOLD) {
+    	vec2 dir = p2-p1,
+            lp = uv-(floor(uv+p1)+.5);
+    	dir = normalize(vec2(dir.y,-dir.x));
+        float l = clamp((LINE_THICKNESS-dot(lp,dir))*AA_SCALE,0.,1.);
+        sum = mix(sum,v1,l);
+    }
+    return sum;
+}
+
+void fragment()
+{
+	float LINE_THICKNESS = 0.4;
+	vec2 ip = UV;
+	ip = UV * (1.0 / TEXTURE_PIXEL_SIZE);
+	
+		//start with nearest pixel as 'background'
+		vec4 s = texelFetch(TEXTURE,ivec2(ip),ML);
+		
+		//draw anti aliased diagonal lines of surrounding pixels as 'foreground'
+		s = diag(s,ip,vec2(-1,0),vec2(0,1), TEXTURE, LINE_THICKNESS);
+		s = diag(s,ip,vec2(0,1),vec2(1,0), TEXTURE, LINE_THICKNESS);
+		s = diag(s,ip,vec2(1,0),vec2(0,-1), TEXTURE, LINE_THICKNESS);
+		s = diag(s,ip,vec2(0,-1),vec2(-1,0), TEXTURE, LINE_THICKNESS);
+		
+		COLOR = s;
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/THRESHOLD = 0.1
+shader_param/AA_SCALE = 2.0
+
+[sub_resource type="Animation" id=3]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -21,8 +83,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Stand"
+[sub_resource type="Animation" id=4]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -43,6 +104,7 @@ scale = Vector2( 4, 4 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 6 )
 position = Vector2( 0, -5.68434e-14 )
 texture = ExtResource( 1 )
 hframes = 3
@@ -57,8 +119,8 @@ polygon = PoolVector2Array( -9.97739, 1.96602, -11.0999, 11.998, 3.94815, 12.068
 polygon = PoolVector2Array( -9.97739, 1.96602, -11.0999, 11.998, 3.94815, 12.0682, 11.0337, 5.99987, 12.9629, 0.843559, 11.3737, -2.7819, 5.87777, -4.13933, 1.01086, -1.92108, 1.04396, 2.97893, -2.8297, 0.0323029, -7.13377, -0.000805378 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Jump = SubResource( 1 )
-anims/Stand = SubResource( 2 )
+anims/Jump = SubResource( 3 )
+anims/Stand = SubResource( 4 )
 
 [node name="antenna" type="Position2D" parent="."]
 position = Vector2( 24, 0 )

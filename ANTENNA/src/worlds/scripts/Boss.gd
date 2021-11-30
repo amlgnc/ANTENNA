@@ -4,12 +4,12 @@ const bullet_red_path = preload("res://src/worlds/scenes/Bullet_red.tscn")
 const bullet_blue_path = preload("res://src/worlds/scenes/Bullet_blue.tscn")
 
 var turn = false
-var hp = 30
+var hp = 40
 
 onready var timer = get_node("Timer")
 
 func _ready():
-	timer.set_wait_time(0.47)
+	timer.set_wait_time(0.40)
 	timer.start()
 			
 func _on_Timer_timeout():
@@ -21,7 +21,7 @@ func _on_Timer_timeout():
 		else:
 			pass
 			shoot_blue()
-	timer.set_wait_time(0.47)
+	timer.set_wait_time(0.40)
 	timer.start()
 	
 func shoot_red():
@@ -45,5 +45,4 @@ func shoot_blue():
 
 func _on_Area2D_area_entered(area):
 	$BossHurtSFX.play()
-	print(hp)
 	hp = hp - 1

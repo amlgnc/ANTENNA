@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/worlds/scenes/Environment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/worlds/scripts/Level.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/worlds/scenes/LevelTransition.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/worlds/scenes/LevelStats.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/worlds/scenes/Boss.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/sounds/music/boss_battle.mp3" type="AudioStream" id=8]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
@@ -35,5 +36,9 @@ position = Vector2( 232, 608 )
 position = Vector2( 1160, 536 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 autoplay = true

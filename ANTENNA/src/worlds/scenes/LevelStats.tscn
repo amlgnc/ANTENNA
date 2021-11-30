@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UI/fonts/text_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/worlds/scripts/Chronometer.gd" type="Script" id=2]
 
 [node name="LevelStats" type="CanvasLayer"]
+script = ExtResource( 2 )
 
 [node name="PVContainer" type="HBoxContainer" parent="."]
 margin_left = 32.0
@@ -98,3 +100,18 @@ margin_right = 186.0
 margin_bottom = 48.0
 custom_fonts/font = ExtResource( 1 )
 text = "BOSS : ???"
+
+[node name="Chrono" type="MarginContainer" parent="."]
+margin_left = 1070.0
+margin_top = 96.0
+margin_right = 1256.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chronometer" type="Label" parent="Chrono"]
+margin_right = 186.0
+margin_bottom = 48.0
+custom_fonts/font = ExtResource( 1 )
+text = "00:00:00"

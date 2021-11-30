@@ -14,6 +14,10 @@ config/name="ANTENNA"
 run/main_scene="res://src/worlds/scenes/World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://src/worlds/scripts/Globals.gd"
+
 [display]
 
 window/size/width=1280

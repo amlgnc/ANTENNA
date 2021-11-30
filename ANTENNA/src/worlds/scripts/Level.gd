@@ -2,12 +2,15 @@ extends Node2D
 
 const final = preload("res://src/worlds/scenes/Final.tscn")
 
+var timer_on = false
+
 func _process(_delta):
 	# the level begins
 	if $LevelTransition.cmpt == 0:
 		$LevelTransition.anim_ready()
 	# fight text
 	if $LevelTransition.cmpt == 1:
+		timer_on = true
 		$LevelTransition/IndicationSFX.play()
 		$LevelTransition.anim_fight()
 		$Player.turn = true
